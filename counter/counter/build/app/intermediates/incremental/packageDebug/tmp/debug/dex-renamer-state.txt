@@ -1,0 +1,4 @@
+#Fri Feb 28 20:58:28 ART 2020
+base.0=/opt/repo/flutter-app/counter/counter/build/app/intermediates/transforms/dexMerger/debug/0
+path.0=classes.dex
+renamed.0=classes.dex

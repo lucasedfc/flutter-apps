@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "/opt/repo/flutter-app/counter/counter/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-es/values-es.xml",
+            "map": [
+                {
+                    "source": "/home/lheim/.gradle/caches/transforms-1/files-1.1/core-1.0.0.aar/af0880043e400fbe8da34933ed8538bb/res/values-es/values-es.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    }
+                }
+            ]
+        }
+    ]
+}
