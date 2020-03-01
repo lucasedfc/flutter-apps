@@ -1,5 +1,5 @@
 {
-    "nombreApp" : "Components",
+    "nameApp" : "Components",
     "routes" : [
         {
             "route" : "alert",
