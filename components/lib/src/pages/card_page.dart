@@ -13,6 +13,23 @@ class CardPage extends StatelessWidget {
           _cardType1(),
           SizedBox(height: 30.0),
           _cardType2(),
+          SizedBox(height: 30.0),
+          _cardType1(),
+          SizedBox(height: 30.0),
+          _cardType2(),
+          SizedBox(height: 30.0),
+          _cardType1(),
+          SizedBox(height: 30.0),
+          _cardType2(),
+          SizedBox(height: 30.0),
+          _cardType1(),
+          SizedBox(height: 30.0),
+          _cardType2(),
+          SizedBox(height: 30.0),
+          _cardType1(),
+          SizedBox(height: 30.0),
+          _cardType2(),
+          SizedBox(height: 30.0)
         ],
       ),
     );
@@ -21,6 +38,9 @@ class CardPage extends StatelessWidget {
 
 Widget _cardType2() {
   return Card(
+    elevation: 5.0,
+    clipBehavior: Clip.antiAlias,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0) ),
     child: Column(
       children: <Widget>[
         FadeInImage(
@@ -36,7 +56,8 @@ Widget _cardType2() {
               'https://upload.wikimedia.org/wikipedia/commons/2/2c/NZ_Landscape_from_the_van.jpg'),
         ), */
         Container(
-            padding: EdgeInsets.all(10.0), child: Text('Subtitle of the image'))
+            padding: EdgeInsets.all(10.0), 
+            child: Text('Subtitle of the image'))
       ],
     ),
   );
@@ -44,6 +65,8 @@ Widget _cardType2() {
 
 Widget _cardType1() {
   return Card(
+    elevation: 5.0,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0) ),
     child: Column(
       children: <Widget>[
         ListTile(
