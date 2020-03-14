@@ -8,6 +8,9 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   String _name = '';
   String _email = '';
+  String _date = '';
+
+  TextEditingController _inputFieldDate = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +21,16 @@ class _InputPageState extends State<InputPage> {
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
         children: <Widget>[
-          _createInput(), 
-          Divider(), 
+          _createInput(),
+          Divider(),
           _createEmail(),
-          Divider(), 
+          Divider(),
           _createPass(),
-          Divider(), 
+          Divider(),
+          _createDate(context),
+          Divider(),
           _createPerson()
-          ],
+        ],
       ),
     );
   }
@@ -43,7 +48,6 @@ class _InputPageState extends State<InputPage> {
           suffixIcon: Icon(Icons.accessibility),
           icon: Icon(Icons.account_circle)),
       onChanged: (value) {
-
         setState(() {});
         _name = value;
       },
@@ -59,32 +63,62 @@ class _InputPageState extends State<InputPage> {
 
   Widget _createEmail() {
     return TextField(
-      keyboardType: TextInputType.emailAddress,
-      decoration: InputDecoration(
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
-          hintText: 'Email',
-          labelText: 'Email',
-          suffixIcon: Icon(Icons.alternate_email),
-          icon: Icon(Icons.email)),
-      onChanged: (value) =>  setState(() {
-        _email = value;
-      })
-      
-    );
+        keyboardType: TextInputType.emailAddress,
+        decoration: InputDecoration(
+            border:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
+            hintText: 'Email',
+            labelText: 'Email',
+            suffixIcon: Icon(Icons.alternate_email),
+            icon: Icon(Icons.email)),
+        onChanged: (value) => setState(() {
+              _email = value;
+            }));
   }
 
-  _createPass() {
+  Widget _createPass() {
     return TextField(
-      obscureText: true,
-      decoration: InputDecoration(
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
-          hintText: 'Password',
-          labelText: 'Password',
-          suffixIcon: Icon(Icons.lock),
-          icon: Icon(Icons.lock)),
-      onChanged: (value) =>  setState(() {
-      })
-      
-    );
+        obscureText: true,
+        decoration: InputDecoration(
+            border:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
+            hintText: 'Password',
+            labelText: 'Password',
+            suffixIcon: Icon(Icons.lock),
+            icon: Icon(Icons.lock)),
+        onChanged: (value) => setState(() {}));
   }
+
+  Widget _createDate(BuildContext context) {
+    return TextField(
+        enableInteractiveSelection: false,
+        controller: _inputFieldDate,
+        decoration: InputDecoration(
+            border:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
+            hintText: 'Birth Date',
+            labelText: 'Birth Date',
+            suffixIcon: Icon(Icons.calendar_today),
+            icon: Icon(Icons.calendar_today)),
+            onTap: () {
+                FocusScope.of(context).requestFocus(new FocusNode());
+                _selectDate(context);
+                            });
+                  }
+                
+                   _selectDate(BuildContext context) async {
+                     DateTime picked =  await showDatePicker(
+                       context: context,
+                       initialDate: new DateTime.now(),
+                       firstDate: new DateTime(2018),
+                       lastDate: new DateTime(2030)
+                     );
+
+                     if(picked != null) {
+                       setState(() {
+                         _date = picked.toString();
+                         _inputFieldDate.text = _date;
+                       });
+                     }
+                  }
 }
