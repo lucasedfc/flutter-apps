@@ -34,26 +34,29 @@ class HomePage extends StatelessWidget {
   }
 
   List<Widget> _listItems(List<dynamic> data, BuildContext context) {
-    
     final List<Widget> options = [];
 
     data.forEach((opt) {
       final widgetTemp = ListTile(
         title: Text(opt['text']),
         leading: getIcon(opt['icon']),
-        trailing: Icon(Icons.keyboard_arrow_right, color: Colors.blue,),
+        trailing: Icon(
+          Icons.keyboard_arrow_right,
+          color: Colors.blue,
+        ),
         onTap: () {
-          final route = MaterialPageRoute(
+          /* final route = MaterialPageRoute(
             builder: (context)=> AlertPage()
             );
           
           
-          Navigator.push(context, route);
+          Navigator.push(context, route); */
+
+          Navigator.pushNamed(context, opt['route']);
         },
       );
 
-      options..add(widgetTemp)
-      ..add(Divider());
+      options..add(widgetTemp)..add(Divider());
     });
 
     return options;
