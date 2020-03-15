@@ -9,6 +9,7 @@ class SliderPage extends StatefulWidget {
 class _SliderPageState extends State<SliderPage> {
 
   double _sliderValue = 200.0;
+  bool _disableCheck = false;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,10 @@ class _SliderPageState extends State<SliderPage> {
         padding: EdgeInsets.only(top: 50.0),
         child: Column(children: <Widget>[
           _createSlider(),
-          Expanded(child: _createImage())
+          _createCheckbox(),
+          _createSwitch(),
+          Expanded(child: _createImage()
+          )
         ],),
         ),
     );
@@ -34,7 +38,7 @@ return Slider(
   value: _sliderValue,
   min: 10.0,
   max: 400.0,
-  onChanged: ( value ) {
+  onChanged: (_disableCheck) ? null : ( value ) {
     setState(() {
       _sliderValue = value.roundToDouble();
       
@@ -48,6 +52,40 @@ return Slider(
       image: NetworkImage('https://as01.epimg.net/meristation/imagenes/2018/07/13/header_image/851294041531472361.jpg'),
       width: _sliderValue,
       fit: BoxFit.contain,
+      );
+  }
+
+  Widget _createCheckbox() {
+    // return Checkbox(
+    //   value: _disableCheck,
+    //   onChanged: (value) {
+    //     setState(() {
+    //     _disableCheck = value;
+    //     });
+    //   }
+    //   );
+
+    return CheckboxListTile(
+      title: Text('Disable Slider'),
+      value: _disableCheck, 
+      onChanged: (value) {
+        setState(() {
+          _disableCheck = value;
+        });
+      }
+      );
+
+  }
+
+  Widget _createSwitch() {
+    return SwitchListTile(
+      title: Text('Disable Slider'),
+      value: _disableCheck, 
+      onChanged: (value) {
+        setState(() {
+          _disableCheck = value;
+        });
+      }
       );
   }
 }
