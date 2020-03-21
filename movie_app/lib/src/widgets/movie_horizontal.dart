@@ -3,24 +3,39 @@ import 'package:movie_app/src/models/movie_model.dart';
 
 class MovieHorizontal extends StatelessWidget {
   final List<Movie> movies;
+  final Function nextPage;
 
-  MovieHorizontal({@required this.movies});
+  MovieHorizontal({@required this.movies, @required this.nextPage});
 
   @override
   Widget build(BuildContext context) {
     final _screenSize = MediaQuery.of(context).size;
+
+    final _pageController = new PageController(
+       initialPage: 1,
+       viewportFraction: 0.3
+    );
+
+    _pageController.addListener(() {
+      if (_pageController.position.pixels >= _pageController.position.maxScrollExtent -200) {
+        print('termno');
+        nextPage();
+      }
+    });
+
+
     return Container(
-        height: _screenSize.height * 0.2, child: PageView(
+        height: _screenSize.height * 0.2,
+        child: PageView(
           pageSnapping: false,
-          controller: PageController(
-            initialPage: 1,
-            viewportFraction: 0.3
-          ),
+          controller: _pageController,
           children: _cards(context))
           );
   }
 
   List<Widget> _cards( BuildContext context) {
+
+    final _screenSize = MediaQuery.of(context).size;
     return movies.map((movie) {
       return Container(
         margin: EdgeInsets.only(right: 15.0),
@@ -34,7 +49,7 @@ class MovieHorizontal extends StatelessWidget {
                 ),
                 placeholder: AssetImage('assets/img/no-image.jpg'),
                 fit: BoxFit.cover,
-                height: 120.0,
+                height:_screenSize.height.toDouble() * 0.18,
               ),
             ),
             Text(
