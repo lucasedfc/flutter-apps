@@ -49,7 +49,7 @@ class MovieHorizontal extends StatelessWidget {
                 ),
                 placeholder: AssetImage('assets/img/no-image.jpg'),
                 fit: BoxFit.cover,
-                height:_screenSize.height.toDouble() * 0.18,
+                height:_screenSize.height.toDouble() * 0.17,
               ),
             ),
             Text(
