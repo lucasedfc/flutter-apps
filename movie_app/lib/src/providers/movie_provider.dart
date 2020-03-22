@@ -10,6 +10,7 @@ class MovieProvider {
   String _language = 'en-US';
 
   int _popularPage = 0;
+  bool _loading = false;
 
   List<Movie> _popular = new List();
 
@@ -39,6 +40,8 @@ class MovieProvider {
 
   Future<List<Movie>> getPopular() async {
 
+    if(_loading) return [];
+    _loading = true;
     _popularPage++;
 
     final url = Uri.https(_url, '3/movie/popular', {
@@ -53,6 +56,7 @@ class MovieProvider {
     _popular.addAll(resp);
     popularSink(_popular);
 
+_loading = false;
     return resp;
   }
 }
