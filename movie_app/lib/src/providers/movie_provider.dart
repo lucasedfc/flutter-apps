@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 class MovieProvider {
   String _api_key = '67e526574227c0660c9af6e76aff122b';
   String _url = 'api.themoviedb.org';
-  String _language = 'en-US';
+  String _language = 'es-ES';
 
   int _popularPage = 0;
   bool _loading = false;
