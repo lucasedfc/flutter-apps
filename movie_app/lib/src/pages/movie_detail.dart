@@ -47,7 +47,7 @@ class MovieDetail extends StatelessWidget {
         ),
         background: FadeInImage(
           image: NetworkImage(movie.getBackDropImg()),
-          placeholder: AssetImage('assets/img/no-image.jpg'),
+          placeholder: AssetImage('assets/img/loading.gif'),
           fadeInDuration: Duration(milliseconds: 20),
           fit: BoxFit.cover,
           ),
