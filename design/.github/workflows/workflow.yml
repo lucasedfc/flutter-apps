@@ -36,4 +36,3 @@ runs-on: ubuntu-latest
         git add .
         git commit -m "Updated docs"
         git push --force secure-origin gh-pages
-        
