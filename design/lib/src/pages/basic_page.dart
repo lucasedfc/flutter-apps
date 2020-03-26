@@ -7,46 +7,57 @@ class BasicPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-      children: <Widget>[
+      body: SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
         _createImage(),
         _createTitle(),
         _createAction(),
         _createText(),
         _createText(),
+        _createText(),
+        _createText(),
         _createText()
         ],
+      ),
     ));
   }
 
   Widget _createImage() {
-    return Image(
-      image: NetworkImage(
-          'https://upload.wikimedia.org/wikipedia/commons/3/35/Neckertal_20150527-6384.jpg'),
+    return Container(
+      width: double.infinity,
+      child: Image(
+        height: 190.0,
+        fit: BoxFit.cover,
+        image: NetworkImage(
+            'https://upload.wikimedia.org/wikipedia/commons/3/35/Neckertal_20150527-6384.jpg'),
+      ),
     );
   }
 
   Widget _createTitle() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text('Lago con un puente', style: titleStyle),
-                SizedBox(height: 7.0),
-                Text(
-                  'Colinas en alemania',
-                  style: subtitleStyle,
-                ),
-              ],
+    return SafeArea(
+          child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text('Lago con un puente', style: titleStyle),
+                  SizedBox(height: 7.0),
+                  Text(
+                    'Colinas en alemania',
+                    style: subtitleStyle,
+                  ),
+                ],
+              ),
             ),
-          ),
-          Icon(Icons.star, color: Colors.red, size: 30.0),
-          Text('41', style: TextStyle(fontSize: 30.0))
-        ],
+            Icon(Icons.star, color: Colors.red, size: 30.0),
+            Text('41', style: TextStyle(fontSize: 30.0))
+          ],
+        ),
       ),
     );
   }
@@ -73,14 +84,16 @@ class BasicPage extends StatelessWidget {
   }
 
   Widget _createText() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
-      child: Text(
-        'Ex mollit officia eu nostrud ea aliqua laboris nostrud sint. Irure ut enim laboris cupidatat amet ipsum anim amet. Ullamco mollit id qui ea cillum. Quis commodo quis aliqua dolore ea deserunt commodo anim consequat nostrud.',
-        style: TextStyle(fontSize: 16.0),
-        textAlign: TextAlign.justify,
+    return SafeArea(
+          child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 30.0),
+        child: Text(
+          'Ex mollit officia eu nostrud ea aliqua laboris nostrud sint. Irure ut enim laboris cupidatat amet ipsum anim amet. Ullamco mollit id qui ea cillum. Quis commodo quis aliqua dolore ea deserunt commodo anim consequat nostrud.',
+          style: TextStyle(fontSize: 16.0),
+          textAlign: TextAlign.justify,
+        ),
+        
       ),
-      
     );
   }
 }
