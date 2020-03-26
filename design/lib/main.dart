@@ -1,4 +1,3 @@
-// TODO Implement this library.
 import 'package:design/src/pages/basic_page.dart';
 import 'package:design/src/pages/scroll_page.dart';
 import 'package:flutter/material.dart';
