@@ -8,6 +8,13 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    /* SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle.light.copyWith(
+        statusBarColor: Colors.white
+      )
+    ); */
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Design',
