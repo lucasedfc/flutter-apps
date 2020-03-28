@@ -50,6 +50,21 @@ class MovieProvider {
     return await _processData(url);
   }
 
+  Future<List<Movie>> actorCredit( String id) async {
+    final url = Uri.https(_url, '3/person/$id/movie_credits',
+        {
+          'api_key': _api_key, 
+          'language': _language,
+          'person_id': id
+        });
+
+        final resp = await http.get(url);
+        final decodedData = json.decode(resp.body);
+        final movies = new Movies.fromJsonList(decodedData['cast']);
+        return movies.items;
+    
+  }
+
   Future<List<Actor>> getCast( String movieId) async {
 
     final url = Uri.https(_url, '3/movie/$movieId/credits',
