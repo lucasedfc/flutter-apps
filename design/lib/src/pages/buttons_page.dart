@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -65,56 +66,61 @@ class ButtonsPage extends StatelessWidget {
       children: [
         TableRow(
         children: [
-          _createButton(),
-          _createButton()
+          _createButton(Colors.blue, Icons.camera_alt, 'Camera'),
+          _createButton(Colors.cyanAccent, Icons.call, 'Call')
         ]
       ),
       TableRow(
         children: [
-          _createButton(),
-          _createButton()
+          _createButton(Colors.deepPurple, Icons.bug_report, 'Bug'),
+          _createButton(Colors.indigo, Icons.memory, 'Memory')
         ]
       ),
       TableRow(
         children: [
-          _createButton(),
-          _createButton()
+          _createButton(Colors.amber, Icons.tablet, 'Tablet'),
+          _createButton(Colors.lightBlue, Icons.pie_chart_outlined, 'Charts')
         ]
       ),
       TableRow(
         children: [
-          _createButton(),
-          _createButton()
+          _createButton(Colors.teal, Icons.cloud, 'Cloud'),
+          _createButton(Colors.red, Icons.mail, 'Mail')
         ]
       )
       ]);
   }
 
-  Widget _createButton() {
-    return Container(
-      height: 180.0,
-      margin: EdgeInsets.all(15.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(30.0),
-        color: Color.fromRGBO(62, 66, 107, 0.7)
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          SizedBox(
-            height: 5.0,
+  Widget _createButton(Color color, IconData icon, String text) {
+    return ClipRRect(
+          child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+        child: Container(
+          height: 180.0,
+          margin: EdgeInsets.all(15.0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30.0),
+            color: Color.fromRGBO(62, 66, 107, 0.7)
           ),
-          CircleAvatar(
-            backgroundColor: Colors.pinkAccent,
-            radius: 35.0,
-            child: Icon(Icons.supervised_user_circle, color: Colors.white, size: 30.0),
-          ),
-          Text('Item', style: TextStyle(color: Colors.pinkAccent)),
-          SizedBox(
-            height: 5.0,
-          )
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              SizedBox(
+                height: 5.0,
+              ),
+              CircleAvatar(
+                backgroundColor: color,
+                radius: 35.0,
+                child: Icon(icon, color: Colors.white, size: 30.0),
+              ),
+              Text(text, style: TextStyle(color: color)),
+              SizedBox(
+                height: 5.0,
+              )
 
-        ],
+            ],
+          ),
+        ),
       ),
     );
   }
