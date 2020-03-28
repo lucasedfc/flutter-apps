@@ -92,33 +92,37 @@ class ButtonsPage extends StatelessWidget {
   }
 
   Widget _createButton(Color color, IconData icon, String text) {
-    return ClipRRect(
-          child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-        child: Container(
-          height: 180.0,
-          margin: EdgeInsets.all(15.0),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30.0),
-            color: Color.fromRGBO(62, 66, 107, 0.7)
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              SizedBox(
-                height: 5.0,
-              ),
-              CircleAvatar(
-                backgroundColor: color,
-                radius: 35.0,
-                child: Icon(icon, color: Colors.white, size: 30.0),
-              ),
-              Text(text, style: TextStyle(color: color)),
-              SizedBox(
-                height: 5.0,
-              )
+    return Padding(
+      padding: const EdgeInsets.all(15.0),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(30.0),
+            child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+          child: Container(
+            height: 180.0,
+           // margin: EdgeInsets.all(15.0),
+            decoration: BoxDecoration(
+              
+              color: Color.fromRGBO(62, 66, 107, 0.7)
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                SizedBox(
+                  height: 5.0,
+                ),
+                CircleAvatar(
+                  backgroundColor: color,
+                  radius: 35.0,
+                  child: Icon(icon, color: Colors.white, size: 30.0),
+                ),
+                Text(text, style: TextStyle(color: color)),
+                SizedBox(
+                  height: 5.0,
+                )
 
-            ],
+              ],
+            ),
           ),
         ),
       ),
