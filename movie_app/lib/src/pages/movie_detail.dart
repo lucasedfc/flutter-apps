@@ -8,8 +8,37 @@ class MovieDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     final Movie movie = ModalRoute.of(context).settings.arguments;
 
+
+
+    final screenSize = MediaQuery.of(context).size;
+
+    final _pageController = new PageController(
+       initialPage: 1,
+       viewportFraction: 0.3
+    );
+
+    _pageController.addListener(() {
+      if (_pageController.position.pixels == _pageController.position.maxScrollExtent) {
+        _pageController.position.animateTo(
+          _pageController.position.maxScrollExtent - screenSize.width * 0.35,
+          duration: Duration(milliseconds: 1000),
+          curve: Curves.elasticOut,
+        );
+      }
+      if (_pageController.position.pixels == _pageController.position.minScrollExtent) {
+        _pageController.position.animateTo(
+          screenSize.width * 0.3,
+          duration: Duration(milliseconds: 1000),
+          curve: Curves.elasticOut,
+        );
+      }
+    }
+    
+    );
+
     return Scaffold(
-        body: CustomScrollView(
+
+      body: CustomScrollView(
       slivers: <Widget>[
         _createAppbar(movie),
         SliverList(
@@ -46,6 +75,9 @@ class MovieDetail extends StatelessWidget {
   }
 
   Widget _posterTitle(BuildContext context, Movie movie) {
+
+    final movieYear = DateTime.parse(movie.releaseDate);
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20.0),
       child: Row(
@@ -67,7 +99,7 @@ class MovieDetail extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(movie.title,
+                Text('${movie.title} (${movieYear.year.toString()}) ',
                     style: Theme.of(context).textTheme.title,
                     overflow: TextOverflow.ellipsis),
                 Text(movie.originalTitle,
@@ -105,7 +137,7 @@ class MovieDetail extends StatelessWidget {
       future: movieProvider.getCast(movie.id.toString()),
       builder: (context, AsyncSnapshot<List> snapshot) {
         if (snapshot.hasData) {
-          return _createActorPageView(snapshot.data);
+          return _createActorPageView( context, snapshot.data);
         } else {
           return Center(
             child: LinearProgressIndicator(),
@@ -115,12 +147,39 @@ class MovieDetail extends StatelessWidget {
     );
   }
 
-  Widget _createActorPageView(List<Actor> actors) {
+  Widget _createActorPageView(BuildContext context, List<Actor> actors) {
+
+    final screenSize = MediaQuery.of(context).size;
+    final _pageController = new PageController(
+       initialPage: 1,
+       viewportFraction: 0.3
+    );
+
+    _pageController.addListener(() {
+      if (_pageController.position.pixels == _pageController.position.maxScrollExtent) {
+        _pageController.position.animateTo(
+          _pageController.position.maxScrollExtent - screenSize.width * 0.35,
+          duration: Duration(milliseconds: 1000),
+          curve: Curves.elasticOut,
+        );
+      }
+      if (_pageController.position.pixels == _pageController.position.minScrollExtent) {
+        _pageController.position.animateTo(
+          screenSize.width * 0.3,
+          duration: Duration(milliseconds: 1000),
+          curve: Curves.elasticOut,
+        );
+      }
+    }
+    
+    );
+
+    
     return SizedBox(
       height: 200.0,
       child: PageView.builder(
         pageSnapping: false,
-        controller: PageController(viewportFraction: 0.3, initialPage: 1),
+        controller: _pageController,
         itemCount: actors.length,
         itemBuilder: (context, i) => actorCard(context, actors[i]),
       ),
@@ -134,7 +193,6 @@ class MovieDetail extends StatelessWidget {
         children: <Widget>[
           GestureDetector(
             onTap: () {
-              print(actor.id);
               Navigator.pushNamed(context, 'actor', arguments: actor);
             },
             child: ClipRRect(

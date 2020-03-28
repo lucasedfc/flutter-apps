@@ -16,6 +16,24 @@ class MovieVertical extends StatelessWidget {
        viewportFraction: 0.3
     );
 
+    _pageController.addListener(() {
+      if (_pageController.position.pixels == _pageController.position.maxScrollExtent) {
+        _pageController.position.animateTo(
+          _pageController.position.maxScrollExtent - _screenSize.width * 1.2,
+          duration: Duration(milliseconds: 1000),
+          curve: Curves.elasticOut,
+        );
+      }
+      if (_pageController.position.pixels == _pageController.position.minScrollExtent) {
+        _pageController.position.animateTo(
+          _screenSize.width * 1.2,
+          duration: Duration(milliseconds: 1000),
+          curve: Curves.elasticOut,
+        );
+      }
+    });
+
+
 
     return Container(
         height: _screenSize.height.toDouble() * 2.0,
@@ -35,6 +53,8 @@ class MovieVertical extends StatelessWidget {
 
     movie.uniqueId = UniqueKey().toString();
 
+    final movieYear = DateTime.parse(movie.releaseDate);
+
     final movieCard = Container(
         child: Column(
           children: <Widget>[
@@ -53,9 +73,10 @@ class MovieVertical extends StatelessWidget {
               ),
             ),
             Text(
-            movie.title,
+            '${movie.title} (${movieYear.year.toString()})',
             overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.subtitle)
+            style: Theme.of(context).textTheme.subtitle),
+            
           ],
         ),
       );

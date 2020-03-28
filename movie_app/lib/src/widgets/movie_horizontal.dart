@@ -17,8 +17,19 @@ class MovieHorizontal extends StatelessWidget {
     );
 
     _pageController.addListener(() {
-      if (_pageController.position.pixels >= _pageController.position.maxScrollExtent -200) {
-        nextPage();
+      if (_pageController.position.pixels == _pageController.position.maxScrollExtent) {
+        _pageController.position.animateTo(
+          _pageController.position.maxScrollExtent - _screenSize.width * 0.35,
+          duration: Duration(milliseconds: 1000),
+          curve: Curves.elasticOut,
+        );
+      }
+      if (_pageController.position.pixels == _pageController.position.minScrollExtent) {
+        _pageController.position.animateTo(
+          _screenSize.width * 0.3,
+          duration: Duration(milliseconds: 1000),
+          curve: Curves.elasticOut,
+        );
       }
     });
 
