@@ -6,7 +6,7 @@ import 'package:movie_app/src/models/movie_model.dart';
 import 'package:http/http.dart' as http;
 
 class MovieProvider {
-  String _api_key = '67e526574227c0660c9af6e76aff122b';
+  String _apiKey = '67e526574227c0660c9af6e76aff122b';
   String _url = 'api.themoviedb.org';
   String _language = 'es-ES';
 
@@ -34,7 +34,7 @@ class MovieProvider {
 
   Future<List<Movie>> getNowPlaying() async {
     final url = Uri.https(_url, '3/movie/now_playing',
-        {'api_key': _api_key, 'language': _language});
+        {'api_key': _apiKey, 'language': _language});
 
     return await _processData(url);
   }
@@ -42,7 +42,7 @@ class MovieProvider {
   Future<List<Movie>> searchMovie( String query) async {
     final url = Uri.https(_url, '3/search/movie',
         {
-          'api_key': _api_key, 
+          'api_key': _apiKey, 
           'language': _language,
           'query': query
         });
@@ -53,7 +53,7 @@ class MovieProvider {
   Future<List<Movie>> actorCredit( String id) async {
     final url = Uri.https(_url, '3/person/$id/movie_credits',
         {
-          'api_key': _api_key, 
+          'api_key': _apiKey, 
           'language': _language,
           'person_id': id
         });
@@ -68,7 +68,7 @@ class MovieProvider {
   Future<List<Actor>> getCast( String movieId) async {
 
     final url = Uri.https(_url, '3/movie/$movieId/credits',
-    {'api_key': _api_key, 'language': _language});
+    {'api_key': _apiKey, 'language': _language});
 
     final resp = await http.get(url);
     final decodedData = json.decode(resp.body);
@@ -83,7 +83,7 @@ class MovieProvider {
     _popularPage++;
 
     final url = Uri.https(_url, '3/movie/popular', {
-      'api_key': _api_key,
+      'api_key': _apiKey,
       'language': _language,
       'page': _popularPage.toString()
     });
