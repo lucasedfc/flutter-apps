@@ -50,7 +50,6 @@ class ActorPage extends StatelessWidget {
   }
 
   Widget _createActorMovies(BuildContext context, List<Movie> movies) {
-
     return Container(
       //width: double.infinity,
       child: Column(
