@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:qrreaderapp/src/pages/addresses_page.dart';
 import 'package:qrreaderapp/src/pages/maps_page.dart';
 
+import 'package:barcode_scan/barcode_scan.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -29,7 +31,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.filter_center_focus),
         backgroundColor: Theme.of(context).primaryColor,
-        onPressed: () {}
+        onPressed: _scanQR
         ),
     );
   }
@@ -61,4 +63,25 @@ class _HomePageState extends State<HomePage> {
         return MapsPage();
     }
   }
+
+   _scanQR() async {
+
+     // https://merlindataquality.com
+     // geo:-34.568600038713754,-58.483997730816704
+
+     String futureString = '';
+
+     try {
+        futureString = await BarcodeScanner.scan();
+     } catch(e) {
+       futureString = e.toString();
+     }
+    
+    print('Future String: $futureString');
+
+    if(futureString != null) {
+      print('Data OK');
+    }
+  }
+
 }
