@@ -69,19 +69,19 @@ class _HomePageState extends State<HomePage> {
      // https://merlindataquality.com
      // geo:-34.568600038713754,-58.483997730816704
 
-     String futureString = '';
+  String futureString = '';
 
-     try {
-        futureString = await BarcodeScanner.scan();
-     } catch(e) {
-       futureString = e.toString();
-     }
+    //  try {
+    //     futureString = await BarcodeScanner.scan();
+    //  } catch(e) {
+    //    futureString = e.toString();
+    //  }
     
-    print('Future String: $futureString');
+    // print('Future String: $futureString');
 
-    if(futureString != null) {
-      print('Data OK');
-    }
+    // if(futureString != null) {
+    //   print('Data OK');
+    // }
   }
 
 }
