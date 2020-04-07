@@ -107,7 +107,7 @@ Future<List<ScanModel>> getAllScans() async {
     return res;
   }
 
-  Future<int> deleteAll(int id) async {
+  Future<int> deleteAll() async {
     final db = await database;
     final res = await db.rawDelete('DELETE FROM Scans');
     return res;
