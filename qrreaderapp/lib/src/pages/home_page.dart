@@ -3,6 +3,7 @@ import 'package:qrreaderapp/src/pages/addresses_page.dart';
 import 'package:qrreaderapp/src/pages/maps_page.dart';
 
 import 'package:barcode_scan/barcode_scan.dart';
+import 'package:qrreaderapp/src/providers/db_provider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -69,19 +70,18 @@ class _HomePageState extends State<HomePage> {
      // https://merlindataquality.com
      // geo:-34.568600038713754,-58.483997730816704
 
-  String futureString = '';
+  String futureString = 'https://merlindataquality.com';
 
     //  try {
     //     futureString = await BarcodeScanner.scan();
     //  } catch(e) {
     //    futureString = e.toString();
     //  }
-    
-    // print('Future String: $futureString');
 
-    // if(futureString != null) {
-    //   print('Data OK');
-    // }
+    if(futureString != null) {
+      final scan = ScanModel( value: futureString);
+      DBProvider.db.newScan(scan);
+    }
   }
 
 }
