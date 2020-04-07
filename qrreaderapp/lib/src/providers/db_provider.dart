@@ -94,5 +94,12 @@ Future<List<ScanModel>> getAllScans() async {
   return list;
   }
 
+  Future<int> updateScan(ScanModel updatedScan) async {
+    final db = await database;
+    final res = await db.update('Scans', updatedScan.toJson(), where: 'id = ?', whereArgs: [updatedScan.id]);
+
+    return res;
+  }
+
 
 }
