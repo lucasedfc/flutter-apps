@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.filter_center_focus),
         backgroundColor: Theme.of(context).primaryColor,
-        onPressed: _scanQR
+        onPressed: () =>_scanQR(context)
         ),
     );
   }
@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-   _scanQR() async {
+   _scanQR(BuildContext context) async {
 
      // https://merlindataquality.com
      // geo:-34.568600038713754,-58.483997730816704
@@ -93,11 +93,11 @@ class _HomePageState extends State<HomePage> {
 
       if (Platform.isIOS) {
         Future.delayed(Duration(milliseconds: 750), () {
-          utils.openScan(scan);
+          utils.openScan(context, scan);
         });
       } else {
         print('Its not IOs');
-        utils.openScan(scan);
+        utils.openScan(context, scan);
       }
 
     }
