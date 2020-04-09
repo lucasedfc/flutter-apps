@@ -1,10 +1,13 @@
+
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:qrreaderapp/src/bloc/scans_bloc.dart';
 import 'package:qrreaderapp/src/models/scan_model.dart';
 import 'package:qrreaderapp/src/pages/addresses_page.dart';
 import 'package:qrreaderapp/src/pages/maps_page.dart';
-
 import 'package:barcode_scan/barcode_scan.dart';
+import 'package:qrreaderapp/src/utils/scans_utils.dart' as utils;
 
 class HomePage extends StatefulWidget {
   @override
@@ -73,7 +76,7 @@ class _HomePageState extends State<HomePage> {
      // https://merlindataquality.com
      // geo:-34.568600038713754,-58.483997730816704
 
-  String futureString = 'https://merlindataquality.com';
+  String futureString = 'https://www.merlindataquality.com';
 
     //  try {
     //     futureString = await BarcodeScanner.scan();
@@ -84,6 +87,18 @@ class _HomePageState extends State<HomePage> {
     if(futureString != null) {
       final scan = ScanModel( value: futureString);
       scansBloc.addScan(scan);
+
+      final scan2 = ScanModel( value: 'geo:-34.568600038713754,-58.483997730816704');
+      scansBloc.addScan(scan2);
+
+      if (Platform.isIOS) {
+        Future.delayed(Duration(milliseconds: 750), () {
+          utils.openScan(scan);
+        });
+      } else {
+        print('Its not IOs');
+        utils.openScan(scan);
+      }
 
     }
   }
