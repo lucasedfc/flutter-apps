@@ -77,9 +77,7 @@ Future<List<ScanModel>> getAllScans() async {
   final db = await database;
   final res = await db.query('Scans');
 
-  List<ScanModel> list = res.isNotEmpty 
-  ? res.map((scan) => ScanModel.fromJson(scan) ).toList()
-  : null;
+  List<ScanModel> list = res.isNotEmpty ? res.map((scan) => ScanModel.fromJson(scan) ).toList() : null;
 
   return list;
   }

@@ -73,23 +73,18 @@ class _HomePageState extends State<HomePage> {
 
    _scanQR(BuildContext context) async {
 
-     // https://merlindataquality.com
-     // geo:-34.568600038713754,-58.483997730816704
+  String futureString;
 
-  String futureString = 'https://www.merlindataquality.com';
-
-    //  try {
-    //     futureString = await BarcodeScanner.scan();
-    //  } catch(e) {
-    //    futureString = e.toString();
-    //  }
+     try {
+        futureString = await BarcodeScanner.scan();
+     } catch(e) {
+       futureString = e.toString();
+       futureString = null;
+     }
 
     if(futureString != null) {
       final scan = ScanModel( value: futureString);
       scansBloc.addScan(scan);
-
-      final scan2 = ScanModel( value: 'geo:-34.568600038713754,-58.483997730816704');
-      scansBloc.addScan(scan2);
 
       if (Platform.isIOS) {
         Future.delayed(Duration(milliseconds: 750), () {
